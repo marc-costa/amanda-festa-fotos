@@ -8,22 +8,18 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- Google Fonts: Estilo Conto de Fadas / Mágico -->
+  <!-- Google Fonts: Conto de Fadas -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    .font-fairy {
-      font-family: 'Cinzel', serif;
-    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-fairy { font-family: 'Cinzel', serif; }
   </style>
 </head>
 <body class="bg-gradient-to-b from-purple-950 via-slate-950 to-slate-950 text-slate-100 min-h-screen p-4 md:p-8">
   
   <div class="max-w-4xl mx-auto space-y-8">
     
-    <!-- Cabeçalho Temático Rapunzel (Roxo Real & Dourado) -->
+    <!-- Cabeçalho Temático Rapunzel -->
     <header class="text-center space-y-4 pt-4">
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold tracking-wider uppercase shadow-lg shadow-amber-500/5">
         ✨ Aniversário de Contos de Fadas ✨
@@ -33,17 +29,19 @@
         Alice faz 5 anos 💜👑
       </h1>
       <p class="text-purple-200/80 text-sm md:text-base max-w-lg mx-auto">
-        Bem-vindos ao reino! Escaneie o QR Code, tire fotos durante a festa e compartilhe suas memórias mágicas no mural ao vivo. 🏮
+        Bem-vindos ao reino! Tire fotos durante a festa e compartilhe suas memórias mágicas no mural ao vivo. 🏮
       </p>
 
-      <!-- Foto da Aniversariante em Destaque (Tema Rapunzel / Moldura Dourada) -->
+      <!-- Foto da Aniversariante em Destaque -->
       <div class="pt-2 flex justify-center">
         <div class="relative group p-1.5 rounded-3xl bg-gradient-to-tr from-amber-500 via-purple-500 to-pink-500 shadow-2xl shadow-purple-900/50 max-w-xs mx-auto transform hover:scale-[1.02] transition duration-300">
-          <div class="rounded-[22px] overflow-hidden bg-slate-900 aspect-[4/5] relative">
+          <div class="rounded-[22px] overflow-hidden bg-slate-900 aspect-[4/5] relative flex items-center justify-center">
+            <!-- Imagem da Alice (certifique-se de salvar o arquivo como alice.jpg na pasta ou ajustar o nome) -->
             <img 
-              src="WhatsApp Image 2026-10-29 at 07.34.53.jpeg" 
+              src="alice.jpg" 
               alt="Alice faz 5 anos" 
               class="w-full h-full object-cover"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop';"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-transparent flex items-end p-4">
               <span class="text-white font-fairy text-sm font-bold tracking-wide drop-shadow">Princesa Alice 🌸</span>
@@ -105,7 +103,6 @@
   </div>
 
   <script>
-    // Credenciais do Supabase isolado da festa
     const SUPABASE_URL = 'https://dnsbrwmnjkkmqbhihsfi.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRuc2Jyd21uamtrbXFiaGloc2ZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxNjk0MjQsImV4cCI6MjEwODc0NTQyNH0.Fz6aTnkvFxcApzJsEstEBup_czaipKeMNfbJdekliLE';
 
@@ -117,7 +114,6 @@
     const submitBtn = document.getElementById('submitBtn');
     const photoGrid = document.getElementById('photoGrid');
 
-    // Buscar fotos
     async function fetchPhotos() {
       const { data, error } = await supabaseClient
         .from('party_photos')
@@ -132,7 +128,6 @@
       renderPhotos(data);
     }
 
-    // Renderizar grid
     function renderPhotos(photos) {
       if (!photos || photos.length === 0) {
         photoGrid.innerHTML = `
@@ -156,7 +151,6 @@
       `).join('');
     }
 
-    // Enviar foto
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const file = fileInput.files[0];
@@ -200,7 +194,6 @@
       }
     });
 
-    // Tempo real
     supabaseClient
       .channel('public:party_photos')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'party_photos' }, payload => {
