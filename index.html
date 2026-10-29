@@ -29,16 +29,16 @@
         Alice faz 5 anos 💜👑
       </h1>
       <p class="text-purple-200/80 text-sm md:text-base max-w-lg mx-auto">
-        Bem-vindos ao reino! Tire fotos durante a festa e compartilhe suas memórias mágicas no mural ao vivo. 🏮
+        Bem-vindos ao reino! Escaneie o QR Code no painel da festa, tire fotos e compartilhe suas memórias mágicas no mural ao vivo. 🏮
       </p>
 
       <!-- Foto da Aniversariante em Destaque -->
       <div class="pt-2 flex justify-center">
         <div class="relative group p-1.5 rounded-3xl bg-gradient-to-tr from-amber-500 via-purple-500 to-pink-500 shadow-2xl shadow-purple-900/50 max-w-xs mx-auto transform hover:scale-[1.02] transition duration-300">
           <div class="rounded-[22px] overflow-hidden bg-slate-900 aspect-[4/5] relative flex items-center justify-center">
-            <!-- Forçado para alice.jpeg -->
+            <!-- Link direto do Supabase fornecido -->
             <img 
-              src="alice.jpeg" 
+              src="https://dnsbrwmnjkkmqbhihsfi.supabase.co/storage/v1/object/sign/party-photos/alice.jpeg?token=eyJraWQiOiJhOWMyZWJjZi03YzhmLTRiMTgtYjg3My0xM2ZlZmUxZjgwNDIiLCJhbGciOiJIUzUxMiJ9.eyJ1cmwiOiJwYXJ0eS1waG90b3MvYWxpY2UuanBlZyIsInNjb3BlIjoiZG93bmxvYWQiLCJpYXQiOjE3OTMyNzA1MjYsImV4cCI6MTgyNDgwNjUyNn0.Wm9RDhiBugVWSMOdE1RPZGP8NXyIsdhCcsKW1Oi9lkAjkTiOdae-Vois2pIuOnaIJNviy0Fv3VNy8IwQkdaGZA" 
               alt="Alice faz 5 anos" 
               class="w-full h-full object-cover"
             />
@@ -160,7 +160,7 @@
 
       try {
         const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+        const fileName = `${Date.now()}_${Math.random().toString(36.substring(2))}.${fileExt}`;
         
         const { error: uploadError } = await supabaseClient.storage
           .from('party-photos')
@@ -203,4 +203,4 @@
     fetchPhotos();
   </script>
 </body>
-</html>
+</html>
