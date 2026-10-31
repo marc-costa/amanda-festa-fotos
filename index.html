@@ -11,18 +11,23 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #140827;
+      background-image:
+        linear-gradient(rgba(20, 8, 39, 0.68), rgba(20, 8, 39, 0.86)),
+        url('./assets/fundo-aniversario.jpeg');
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
     .font-fairy { font-family: 'Cinzel', serif; }
     #birthday-presentation {
-      background-image:
-        linear-gradient(180deg, rgba(20, 8, 39, 0.48), rgba(20, 8, 39, 0.76)),
-        url('./assets/fundo-aniversario.jpeg');
-      background-position: center 42%;
-      background-size: cover;
+      background-color: rgba(20, 8, 39, 0.12);
     }
   </style>
 </head>
-<body class="bg-gradient-to-b from-purple-950 via-slate-950 to-slate-950 text-slate-100 min-h-screen">
+<body class="text-slate-100 min-h-screen">
 
   <section id="birthday-presentation" class="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12 md:px-8">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/70 via-transparent to-purple-950/20"></div>
@@ -35,9 +40,23 @@
           Uma surpresa para Alice
         </h1>
         <p class="mx-auto max-w-2xl text-sm text-purple-50 drop-shadow-md sm:text-lg">
-          Aperte o play e aproveite este momento mágico 💜
+          Compartilhe uma foto da festa ou assista à surpresa 💜
         </p>
       </div>
+      <nav aria-label="O que você quer fazer?" class="flex w-full max-w-xl flex-col justify-center gap-3 sm:flex-row">
+        <a
+          href="#upload-photos"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 text-sm font-bold text-white shadow-xl shadow-purple-950/40 transition hover:from-purple-500 hover:to-pink-500 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:ring-offset-2 focus:ring-offset-purple-950"
+        >
+          Enviar fotos para o mural 📸
+        </a>
+        <a
+          href="#birthday-video-player"
+          class="inline-flex min-h-12 items-center justify-center rounded-full border border-amber-100/70 bg-purple-950/65 px-6 py-3 text-sm font-semibold text-amber-100 shadow-lg backdrop-blur transition hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-amber-200"
+        >
+          Assistir à surpresa ▶
+        </a>
+      </nav>
       <div id="birthday-video-player" class="w-fit max-w-full overflow-hidden rounded-2xl border border-amber-200/70 bg-slate-950/90 p-1.5 shadow-[0_20px_80px_rgba(10,4,24,0.65)] sm:rounded-3xl sm:p-2">
         <video
           id="birthday-video"
@@ -60,12 +79,6 @@
         >
           Apresentar em tela cheia ⛶
         </button>
-        <a
-          href="#mural-fotos"
-          class="rounded-full border border-white/40 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white"
-        >
-          Ir para o mural de fotos
-        </a>
       </div>
     </div>
   </section>
@@ -103,21 +116,22 @@
     </header>
 
     <!-- Formulário de Envio de Fotos -->
-    <section class="bg-purple-900/20 backdrop-blur-md border border-purple-500/30 p-6 rounded-3xl shadow-xl max-w-md mx-auto">
+    <section id="upload-photos" class="scroll-mt-6 bg-purple-900/20 backdrop-blur-md border border-purple-500/30 p-6 rounded-3xl shadow-xl max-w-md mx-auto">
       <h2 class="font-fairy text-lg font-semibold mb-4 text-center text-amber-200">Adicionar Foto ao Reino 📸</h2>
+      <p class="mb-5 text-center text-sm text-purple-200/80">Escolha uma foto, informe seu nome (opcional) e toque em enviar.</p>
       <form id="uploadForm" class="space-y-4">
         <div>
-          <label class="block text-xs font-medium text-purple-200/70 mb-1">Seu Nome ou da Família</label>
+          <label for="uploaderName" class="block text-xs font-medium text-purple-200/70 mb-1">Seu nome ou da família (opcional)</label>
           <input 
             type="text" 
             id="uploaderName" 
-            placeholder="Ex: Família Real / Ttia Ju" 
+            placeholder="Ex.: Família da Júlia"
             class="w-full bg-slate-950/80 border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400 text-slate-100 placeholder-slate-500"
           />
         </div>
 
         <div>
-          <label class="block text-xs font-medium text-purple-200/70 mb-1">Escolher Imagem da Festa</label>
+          <label for="fileInput" class="block text-xs font-medium text-purple-200/70 mb-1">Escolha uma foto da festa</label>
           <input 
             type="file" 
             id="fileInput" 
