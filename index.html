@@ -13,11 +13,64 @@
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-fairy { font-family: 'Cinzel', serif; }
+    #birthday-presentation {
+      background-image:
+        linear-gradient(180deg, rgba(20, 8, 39, 0.48), rgba(20, 8, 39, 0.76)),
+        url('./assets/fundo-aniversario.jpeg');
+      background-position: center 42%;
+      background-size: cover;
+    }
   </style>
 </head>
-<body class="bg-gradient-to-b from-purple-950 via-slate-950 to-slate-950 text-slate-100 min-h-screen p-4 md:p-8">
+<body class="bg-gradient-to-b from-purple-950 via-slate-950 to-slate-950 text-slate-100 min-h-screen">
+
+  <section id="birthday-presentation" class="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12 md:px-8">
+    <div class="absolute inset-0 bg-gradient-to-t from-purple-950/70 via-transparent to-purple-950/20"></div>
+    <div class="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-6 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-amber-200/40 bg-purple-950/50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-amber-100 shadow-lg backdrop-blur-sm">
+        ✨ Um momento especial ✨
+      </div>
+      <div class="space-y-3">
+        <h1 class="font-fairy text-3xl font-bold tracking-wide text-amber-100 drop-shadow-[0_3px_12px_rgba(35,12,52,0.9)] sm:text-5xl md:text-6xl">
+          Uma surpresa para Alice
+        </h1>
+        <p class="mx-auto max-w-2xl text-sm text-purple-50 drop-shadow-md sm:text-lg">
+          Aperte o play e aproveite este momento mágico 💜
+        </p>
+      </div>
+      <div id="birthday-video-player" class="w-fit max-w-full overflow-hidden rounded-2xl border border-amber-200/70 bg-slate-950/90 p-1.5 shadow-[0_20px_80px_rgba(10,4,24,0.65)] sm:rounded-3xl sm:p-2">
+        <video
+          id="birthday-video"
+          class="mx-auto block h-[58vh] max-h-[620px] w-auto max-w-full rounded-xl bg-black object-contain sm:rounded-2xl"
+          controls
+          playsinline
+          preload="metadata"
+          poster="./assets/fundo-aniversario.jpeg"
+          aria-label="Vídeo de aniversário da Alice"
+        >
+          <source src="./videos/video-aniversario.mp4" type="video/mp4">
+          Seu navegador não conseguiu reproduzir o vídeo. Tente abrir esta página em outro navegador.
+        </video>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <button
+          id="fullscreen-video"
+          type="button"
+          class="rounded-full border border-amber-100/60 bg-purple-950/65 px-5 py-2.5 text-sm font-semibold text-amber-100 shadow-lg backdrop-blur transition hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-amber-200"
+        >
+          Apresentar em tela cheia ⛶
+        </button>
+        <a
+          href="#mural-fotos"
+          class="rounded-full border border-white/40 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white"
+        >
+          Ir para o mural de fotos
+        </a>
+      </div>
+    </div>
+  </section>
   
-  <div class="max-w-4xl mx-auto space-y-8">
+  <div class="mx-auto max-w-4xl space-y-8 px-4 py-8 md:px-8 md:py-12">
     
     <!-- Cabeçalho Temático Rapunzel -->
     <header class="text-center space-y-4 pt-4">
@@ -85,7 +138,7 @@
     </section>
 
     <!-- Mural / Álbum de Fotos em Tempo Real -->
-    <section class="space-y-4 pt-4">
+    <section id="mural-fotos" class="space-y-4 pt-4">
       <div class="flex items-center justify-between border-b border-purple-900/50 pb-3">
         <h2 class="font-fairy text-2xl font-bold text-amber-200">Álbum Mágico</h2>
         <span class="text-xs text-purple-300/60 bg-purple-950 px-3 py-1 rounded-full border border-purple-900">Atualização instantânea ⚡</span>
@@ -101,6 +154,22 @@
   </div>
 
   <script>
+    const birthdayVideoPlayer = document.getElementById('birthday-video-player');
+    const fullscreenVideoButton = document.getElementById('fullscreen-video');
+
+    fullscreenVideoButton.addEventListener('click', async () => {
+      try {
+        if (document.fullscreenElement) {
+          await document.exitFullscreen();
+        } else {
+          await birthdayVideoPlayer.requestFullscreen();
+        }
+      } catch (error) {
+        console.error('Não foi possível abrir o vídeo em tela cheia:', error);
+        alert('Não foi possível abrir em tela cheia neste navegador. Você ainda pode assistir pelos controles do vídeo.');
+      }
+    });
+
     const SUPABASE_URL = 'https://dnsbrwmnjkkmqbhihsfi.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRuc2Jyd21uamtrbXFiaGloc2ZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxNjk0MjQsImV4cCI6MjEwODc0NTQyNH0.Fz6aTnkvFxcApzJsEstEBup_czaipKeMNfbJdekliLE';
 
